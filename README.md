@@ -1,4 +1,4 @@
-# 🦅 DevClaw AI Assistant for GitHub
+# 🦅 Falcon AI Assistant for GitHub
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
