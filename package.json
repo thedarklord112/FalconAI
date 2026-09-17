@@ -1,0 +1,47 @@
+{
+  "name": "devclaw-assistant",
+  "version": "1.0.0",
+  "description": "Autonomous AI assistant for GitHub repositories powered by Gemini 3.8 Flash",
+  "main": "dist/index.js",
+  "bin": {
+    "devclaw": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "devclaw": "tsx src/cli.ts",
+    "review": "tsx src/cli.ts review",
+    "fix": "tsx src/cli.ts fix",
+    "readme": "tsx src/cli.ts readme",
+    "lint": "eslint src/**/*.ts",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "ai-agent",
+    "github-assistant",
+    "code-review",
+    "gemini",
+    "swe-agent",
+    "devclaw",
+    "autonomous-developer"
+  ],
+  "author": "DevClaw Team",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@octokit/rest": "^20.1.1",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "glob": "^10.4.5",
+    "ignore": "^5.3.1",
+    "simple-git": "^3.25.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

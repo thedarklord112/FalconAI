@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devclaw/devclaw/main/schema.json",
+  "version": "1.0",
+  "model": {
+    "provider": "gemini",
+    "name": "gemini-3.8-flash",
+    "temperature": 0.2,
+    "maxTokens": 8192
+  },
+  "repository": {
+    "defaultBranch": "main",
+    "ignorePatterns": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.git/**",
+      "**/*.min.js",
+      "**/coverage/**",
+      "**/*.lock"
+    ],
+    "secretPatterns": [
+      "**/.*env*",
+      "**/*.pem",
+      "**/*.key"
+    ]
+  },
+  "rules": {
+    "autoReviewPRs": true,
+    "securityAudit": true,
+    "requireTestsForFixes": true,
+    "maxFilesPerReview": 25,
+    "branchPrefix": "devclaw/patch-"
+  },
+  "skills": [
+    "skills/pr-reviewer/SKILL.md",
+    "skills/bug-fixer/SKILL.md",
+    "skills/docs-architect/SKILL.md"
+  ]
+}

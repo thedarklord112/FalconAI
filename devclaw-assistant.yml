@@ -1,0 +1,52 @@
+name: DevClaw GitHub Assistant
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to run (review, sweep, readme)'
+        required: true
+        default: 'review'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  devclaw-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install DevClaw
+        run: npm ci || npm install
+
+      - name: Run DevClaw AI PR Review
+        if: github.event_name == 'pull_request'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx devclaw review --pr ${{ github.event.pull_request.number }}
+
+      - name: Run DevClaw Issue Resolver
+        if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'devclaw')
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx devclaw fix --issue ${{ github.event.issue.number }}
